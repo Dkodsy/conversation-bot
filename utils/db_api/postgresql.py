@@ -17,6 +17,7 @@ class Database:
         CREATE TABLE IF NOT EXISTS Users (
             id INT NOT NULL,
             Name varchar(255) NOT NULL,
+            Talk varchar(255),
             PRIMARY KEY (id)
             );
         """
@@ -27,6 +28,12 @@ class Database:
         INSERT INTO Users(id, Name) VALUES($1, $2)
         """
         await self.pool.execute(sql, id, name)
+
+    async def add_talk(self, talk, id):
+        sql = """
+        UPDATE Users SET talk=$1 WHERE id=$2
+        """
+        await self.pool.execute(sql, talk, id)
 
     async def delete_users(self):
         await self.pool.execute("DELETE FROM Users WHERE True")

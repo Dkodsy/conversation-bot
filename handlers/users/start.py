@@ -1,3 +1,4 @@
+import asyncpg
 from aiogram import types
 from aiogram.dispatcher.filters import CommandStart
 
@@ -12,5 +13,5 @@ async def bot_start(message: types.Message):
     try:
         await db.add_user(id=message.from_user.id,
                           name=message.from_user.full_name)
-    except:
-        pass
+    except asyncpg.exceptions.UniqueViolationError as err:
+        print("что то пошло не так", err)
