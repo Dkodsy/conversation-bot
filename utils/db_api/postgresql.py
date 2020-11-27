@@ -48,5 +48,9 @@ class Database:
         """
         await self.pool.execute(sql, id, talk_name)
 
-    async def delete_users(self):
-        await self.pool.execute("DELETE FROM Users WHERE True")
+    async def choose_talk(self, id: int):
+        # SQL_EXAMPLE = "SELECT * FROM Users where id=1 AND Name='John'"
+        sql = f"""
+                SELECT name_talk FROM talks WHERE user_id = $1
+                """
+        return await self.pool.fetch(sql, id)

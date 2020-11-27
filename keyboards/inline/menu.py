@@ -13,3 +13,4 @@ start_menu = InlineKeyboardMarkup(inline_keyboard=[
     ]
 ],
 )
+
