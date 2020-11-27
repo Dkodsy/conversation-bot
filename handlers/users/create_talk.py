@@ -24,5 +24,5 @@ async def choose_create(call: CallbackQuery, callback_data: dict):
 async def answer_S1(message: types.Message, state: FSMContext):
     name_talk = message.text
     await message.answer(f"Вы назвали беседу {name_talk}")
-    await db.add_talk(talk=name_talk, id=message.from_user.id)
+    await db.add_talk(id=message.from_user.id, talk_name=name_talk)
     await state.finish()
