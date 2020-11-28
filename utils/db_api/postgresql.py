@@ -54,3 +54,9 @@ class Database:
                 SELECT name_talk FROM talks WHERE user_id = $1
                 """
         return await self.pool.fetch(sql, id)
+
+    async def show_talk_themes(self, id: int, theme_name: str):
+        sql = f"""
+                SELECT theme_1, theme_2, theme_3, theme_4, theme_5 FROM talks WHERE user_id = $1 AND name_talk = $2
+                """
+        return await self.pool.fetch(sql, id, theme_name)
